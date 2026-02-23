@@ -1,24 +1,34 @@
 # Changelog
 
-## [Unreleased]
+## [2.1.0]
 
 ### Added
 
-- Added `xcodebuildmcp init` CLI command to install agent skills, replacing the standalone `install-skill.sh` script. Supports auto-detection of AI clients (Claude Code, Cursor, Codex), `--print` for unsupported clients, and `--uninstall` for removal.
+- Added `xcodebuildmcp init` CLI command to install agent skills, replacing the standalone `install-skill.sh` script. Supports auto-detection of AI clients (Claude Code, Cursor, Codex), `--print` for unsupported clients, and `--uninstall` for removal. See [docs/SKILLS.md](docs/SKILLS.md#install).
+- Added namespaced session defaults profiles, letting you save and switch between different project/scheme/simulator configurations without reconfiguring each time. See [docs/SESSION_DEFAULTS.md](docs/SESSION_DEFAULTS.md#namespaced-profiles).
+- Added support for persisting custom environment variables in session defaults ([#235](https://github.com/getsentry/XcodeBuildMCP/pull/235) by [@kamal](https://github.com/kamal)). See [docs/SESSION_DEFAULTS.md](docs/SESSION_DEFAULTS.md#persisting-defaults).
+- Added Kiro client setup instructions ([#222](https://github.com/getsentry/XcodeBuildMCP/pull/222) by [@manojmahapatra](https://github.com/manojmahapatra)).
 
 ### Changed
 
-- Changed MCP `xcode-ide` integration to expose manifest-managed gateway tools (`xcode_ide_list_tools`, `xcode_ide_call_tool`) while keeping CLI dynamic `xcode_tools_*` behavior unchanged ([#210](https://github.com/getsentry/XcodeBuildMCP/issues/210))
-- Deferred non-critical Xcode IDE state synchronization and Sentry enrichment work until after MCP connect to reduce handshake-path latency ([#210](https://github.com/getsentry/XcodeBuildMCP/issues/210))
+- Faster MCP startup when the Xcode IDE workflow is enabled — tools are available sooner after connecting ([#210](https://github.com/getsentry/XcodeBuildMCP/issues/210)). See [docs/XCODE_IDE_MCPBRIDGE.md](docs/XCODE_IDE_MCPBRIDGE.md).
+- Agents now use the combined build-and-run tool for simulator run intents, avoiding a redundant separate build step.
+- Improved next-step suggestions so agents receive more accurate follow-up actions after each tool call.
+- Updated UI automation tap guidance to prefer label and ID targets, reducing agent errors.
 
 ### Fixed
 
-- Removed startup dependency on handshake-time Xcode bridge `tools/list` sync for MCP tool registration, preventing bridge list latency from delaying initial connect ([#210](https://github.com/getsentry/XcodeBuildMCP/issues/210))
-- Fixed Sentry telemetry scope to capture only internal XcodeBuildMCP runtime failures, removing broad MCP wrapping, PII-heavy tags, and default per-error log capture ([#204](https://github.com/getsentry/XcodeBuildMCP/issues/204))
+- Fixed false positive error and warning detection when build output contained echoed source code ([#218](https://github.com/getsentry/XcodeBuildMCP/pull/218) by [@nebooz](https://github.com/nebooz)).
+- Fixed outdated tool names and parameters in the CLI skill file ([#217](https://github.com/getsentry/XcodeBuildMCP/pull/217) by [@pocketpixels](https://github.com/pocketpixels)).
+- Fixed Sentry telemetry scope to capture only internal runtime failures, removing unnecessary data collection ([#204](https://github.com/getsentry/XcodeBuildMCP/issues/204)).
+- Fixed a shell injection vulnerability in the release workflow ([#229](https://github.com/getsentry/XcodeBuildMCP/pull/229)).
+- Improved privacy redaction in the `doctor` command to better protect project names and paths in default output.
 
 ### Removed
 
 - Removed `scripts/install-skill.sh` in favour of `xcodebuildmcp init`.
+
+Various other internal improvements to stability, performance, and code quality.
 
 ## [2.0.7]
 
@@ -292,4 +302,5 @@ Please note that the UI automation features are an early preview and currently i
 ## [v1.0.1] - 2025-04-02
 - Initial release of XcodeBuildMCP
 - Basic support for building iOS and macOS applications
+
 
