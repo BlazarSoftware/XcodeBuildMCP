@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+remote_name="${1:-}"
+
+if [ "$remote_name" = "upstream" ]; then
+  echo "Push blocked: remote 'upstream' is fetch-only for this fork. Push to 'origin' instead." >&2
+  exit 1
+fi
