@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Added `set_plist_value` tool to set plist key-path values via MCP and CLI.
+
+### Changed
+
+### Fixed
+
+### Removed
+
 ## [2.1.0]
 
 ### Added
@@ -302,5 +314,4 @@ Please note that the UI automation features are an early preview and currently i
 ## [v1.0.1] - 2025-04-02
 - Initial release of XcodeBuildMCP
 - Basic support for building iOS and macOS applications
-
 

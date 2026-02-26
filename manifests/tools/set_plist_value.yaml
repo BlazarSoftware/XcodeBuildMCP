@@ -1,0 +1,11 @@
+id: set_plist_value
+module: mcp/tools/utilities/set_plist_value
+names:
+  mcp: set_plist_value
+  cli: set-plist-value
+description: Set a key path value in a plist file.
+predicates:
+  - hideWhenXcodeAgentMode
+annotations:
+  title: Set Plist Value
+  destructiveHint: true

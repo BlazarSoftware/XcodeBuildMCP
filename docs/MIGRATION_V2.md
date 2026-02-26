@@ -173,7 +173,7 @@ Set `XCODEBUILDMCP_ENABLED_WORKFLOWS` in your MCP client configuration:
 | `debugging` | LLDB attach, breakpoints, variable inspection |
 | `logging` | Simulator and device log capture |
 | `simulator-management` | Boot, list, open simulators |
-| `utilities` | Clean build products |
+| `utilities` | Build utilities (clean products, set plist values) |
 | `project-discovery` | Discover projects and workspaces |
 | `project-scaffolding` | Create new projects from templates |
 | `session-management` | Session defaults management |

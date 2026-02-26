@@ -88,6 +88,7 @@ describe('CLI Surface (e2e)', () => {
       { workflow: 'project-discovery', tool: 'list-schemes', expected: '--project-path' },
       { workflow: 'ui-automation', tool: 'tap', expected: '--simulator-id' },
       { workflow: 'utilities', tool: 'clean', expected: '--scheme' },
+      { workflow: 'utilities', tool: 'set-plist-value', expected: '--plist-path' },
     ];
 
     it.each(toolCases)(
